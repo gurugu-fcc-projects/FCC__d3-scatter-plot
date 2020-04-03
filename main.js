@@ -40,8 +40,11 @@ svgContainer
   .text("Time in minutes");
 
 d3.json(dataUrl).then(data => {
+  const parseYear = d3.timeParse("%Y");
+
   console.log(data);
-  xScale.domain(d3.extent(data, d => d["Year"]));
+  xScale.domain(d3.extent(data, d => parseYear(d["Year"])));
+  yScale.domain(d3.extent(data, d => d["Time"]));
 
   //--> X axis
   svgContainer
@@ -50,6 +53,7 @@ d3.json(dataUrl).then(data => {
     .attr("class", "axis")
     .attr("transform", `translate(0, ${height})`)
     .call(xAxis.ticks(null).tickSize(10, 10, 0));
+
   //--> Y axis
   svgContainer
     .append("g")
