@@ -9,3 +9,89 @@
 body {
   font-family: "Kanit", sans-serif;
 }
+
+:root {
+  --bg-color: rgb(44, 44, 44);
+  --bg-color-2: rgb(65, 61, 61);
+  --text-color: rgb(240, 240, 240);
+  --text-color-2: rgb(212, 186, 186);
+  --bar-color: #0a7e8d;
+  --bar-color-hover: #9ee3ec;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  overflow: hidden;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.footer {
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-color-2);
+  background-color: var(--bg-color-2);
+}
+
+#title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.4rem;
+  color: var(--text-color);
+}
+
+/* .chart {
+  position: relative;
+} */
+
+/* .bar {
+  fill: var(--bar-color);
+  cursor: pointer;
+}
+
+.bar:hover {
+  fill: var(--bar-color-hover);
+} */
+
+.axis-label {
+  stroke: var(--text-color-2);
+  font-weight: 100;
+}
+
+.axis text,
+.axis path,
+.axis line {
+  stroke: var(--text-color-2);
+}
+
+.axis text {
+  font-weight: 100;
+}
+
+/* #tooltip {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  height: 90px;
+  min-width: 180px;
+  padding: 20px;
+  border-radius: 10px;
+  color: var(--text-color);
+  background-color: var(--bg-color-2);
+  pointer-events: none;
+} */
