@@ -26,16 +26,17 @@ const svgContainer = svg
 svgContainer
   .append("text")
   .attr("class", "axis-label")
-  .attr("x", width / 2)
-  .attr("y", height)
+  .attr("x", width / 2 - 30)
+  .attr("y", height + 50)
   .text("Year");
+
 //--> Y axis label
 svgContainer
   .append("text")
   .attr("class", "axis-label")
   .attr("transform", "rotate(-90)")
-  .attr("x", -130)
-  .attr("y", 10)
+  .attr("x", -60 - height / 2)
+  .attr("y", -60)
   .text("Time in minutes");
 
 d3.json(dataUrl).then(data => {
