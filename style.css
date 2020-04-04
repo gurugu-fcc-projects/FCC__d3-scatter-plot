@@ -16,7 +16,9 @@ body {
   --text-color: rgb(240, 240, 240);
   --text-color-2: rgb(212, 186, 186);
   --circle-color: #0a7e8d;
-  --circle-color-doping: #d18835;
+  --circle-color-doping: rgb(138, 30, 11);
+  --circle-color-doping: rgb(138, 11, 81);
+  --circle-color-doping-hover: rgb(233, 156, 233);
   --circle-color-hover: #9ee3ec;
 }
 
@@ -62,7 +64,7 @@ body {
 .data-circle {
   fill: var(--circle-color);
   cursor: pointer;
-  opacity: 0.6;
+  opacity: 0.7;
   transition: fill 0.5s;
 }
 
@@ -74,6 +76,10 @@ body {
 
 .data-circle:hover {
   fill: var(--circle-color-hover);
+}
+
+.data-circle.doping:hover {
+  fill: var(--circle-color-doping-hover);
 }
 
 .axis-label {
@@ -91,7 +97,7 @@ body {
   font-weight: 100;
 }
 
-/* #tooltip {
+#tooltip {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -103,4 +109,4 @@ body {
   color: var(--text-color);
   background-color: var(--bg-color-2);
   pointer-events: none;
-} */
+}

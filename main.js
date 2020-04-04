@@ -43,11 +43,6 @@ d3.json(dataUrl)
     const parseYear = d3.timeParse("%Y");
     const timeFormat = d3.timeFormat("%M:%S");
 
-    //--> Set Time to proper format
-    // data.forEach((datum) => {
-    //   datum["Time"] = Date.parse(`01 Jan 1970 00:${datum["Time"]} GMT`);
-    // });
-
     console.log(data);
 
     //--> X & Y scale domains
@@ -55,7 +50,10 @@ d3.json(dataUrl)
       d3.min(data, (d) => parseYear(d["Year"] - 1)),
       d3.max(data, (d) => parseYear(d["Year"] + 1)),
     ]);
-    yScale.domain(d3.extent(data, (d) => d["Seconds"] * 1000));
+    yScale.domain([
+      d3.min(data, (d) => d["Seconds"] * 1000 - 10000),
+      d3.max(data, (d) => d["Seconds"] * 1000 + 10000),
+    ]);
 
     //--> X axis
     svgContainer
