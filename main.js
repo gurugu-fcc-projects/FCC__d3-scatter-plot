@@ -38,30 +38,16 @@ svgContainer
   .attr("y", -60)
   .text("Race time in minutes");
 
-//--> Add legend
-// const legendContent =
-//   "<div>Doping allegations</div><div>No doping allegations</div>";
-
-// const legend = d3
-//   .select(".content")
-//   .append("div")
-//   .attr("id", "legend")
-//   .style("left", `${width - 50}px`)
-//   .style("top", "300px")
-//   .html(legendContent);
-
 //--> Add tooltip
 const tooltip = d3
   .select(".content")
   .append("div")
   .attr("id", "tooltip")
-  // .style("left", width / 2)
-  // .style("top", height / 2)
   .style("opacity", 0);
 
 //--> Show tooltip
 const showTooltip = (d) => {
-  const content = `<div>${d["Name"]}</div><div>${d["Doping"]}</div>`;
+  const content = `<div>${d["Name"]} (${d["Nationality"]})</div><div>Place: ${d["Place"]}</div><div>${d["Doping"]}</div>`;
 
   tooltip
     .html(content)
