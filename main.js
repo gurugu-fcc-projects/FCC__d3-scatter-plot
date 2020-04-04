@@ -77,10 +77,9 @@ d3.json(dataUrl)
       .data(data)
       .enter()
       .append("circle")
-      .attr("cx", (d, i) => 100 + i * 12)
-      .attr("cy", (d, i) => 100 + i * 12)
+      .attr("cx", (d, i) => xScale(parseYear(d["Year"])))
+      .attr("cy", (d, i) => yScale(d["Seconds"] * 1000))
       .attr("r", 10)
       .attr("class", "data-circle");
-    // .attr("fill", "tomato");
   })
   .catch((err) => console.log(err));
