@@ -41,20 +41,21 @@ svgContainer
 d3.json(dataUrl)
   .then((data) => {
     const parseYear = d3.timeParse("%Y");
-    // const parseTime = d3.timeParse("%M:%S");
     const timeFormat = d3.timeFormat("%M:%S");
 
-    data.forEach((datum) => {
-      datum["Time"] = Date.parse(`01 Jan 1970 00:${datum["Time"]} GMT`);
-    });
+    //--> Set Time to proper format
+    // data.forEach((datum) => {
+    //   datum["Time"] = Date.parse(`01 Jan 1970 00:${datum["Time"]} GMT`);
+    // });
 
     console.log(data);
 
+    //--> X & Y scale domains
     xScale.domain([
       d3.min(data, (d) => parseYear(d["Year"] - 1)),
       d3.max(data, (d) => parseYear(d["Year"] + 1)),
     ]);
-    yScale.domain(d3.extent(data, (d) => d["Time"]));
+    yScale.domain(d3.extent(data, (d) => d["Seconds"] * 1000));
 
     //--> X axis
     svgContainer
@@ -70,5 +71,15 @@ d3.json(dataUrl)
       .attr("id", "y-axis")
       .attr("class", "axis")
       .call(yAxis.ticks(null).tickSize(10).tickFormat(timeFormat));
+
+    svgContainer
+      .selectAll("circle")
+      .data(data)
+      .enter()
+      .append("circle")
+      .attr("cx", (d, i) => 100 + i * 12)
+      .attr("cy", (d, i) => 100 + i * 12)
+      .attr("r", 10)
+      .attr("fill", "tomato");
   })
   .catch((err) => console.log(err));
