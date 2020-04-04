@@ -106,3 +106,33 @@ body {
   background-color: var(--bg-color-2);
   pointer-events: none;
 }
+
+#legend {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 90px;
+  width: 200px;
+  left: 900px;
+  top: 280px;
+  padding: 10px;
+  color: var(--text-color);
+}
+
+.legend {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+}
+
+.legend.legend-doping {
+  background-color: var(--circle-color-doping);
+}
+
+.legend.legend-no-doping {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: var(--circle-color);
+}
