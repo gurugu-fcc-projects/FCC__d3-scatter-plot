@@ -57,28 +57,24 @@ body {
   color: var(--text-color);
 }
 
-/* .chart {
-  position: relative;
-} */
-
-.data-circle {
+.dot {
   fill: var(--circle-color);
   cursor: pointer;
   opacity: 0.7;
   transition: fill 0.5s;
 }
 
-.data-circle.doping {
+.dot.doping {
   fill: var(--circle-color-doping);
   cursor: pointer;
   transition: fill 0.5s;
 }
 
-.data-circle:hover {
+.dot:hover {
   fill: var(--circle-color-hover);
 }
 
-.data-circle.doping:hover {
+.dot.doping:hover {
   fill: var(--circle-color-doping-hover);
 }
 

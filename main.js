@@ -55,6 +55,7 @@ const showTooltip = (d) => {
     .html(content)
     .style("left", `${d3.event.pageX + 15}px`)
     .style("top", `${d3.event.pageY - 28}px`)
+    .attr("data-year", d["Year"])
     .transition()
     .duration(200)
     .style("opacity", 0.9);
@@ -105,9 +106,12 @@ d3.json(dataUrl)
       .attr("cx", (d) => xScale(parseYear(d["Year"])))
       .attr("cy", (d) => yScale(d["Seconds"] * 1000))
       .attr("r", 10)
-      .attr("class", (d) =>
-        d["Doping"].length > 0 ? "data-circle doping" : "data-circle"
-      )
+      .attr("class", (d) => (d["Doping"].length > 0 ? "dot doping" : "dot"))
+      .attr("data-xvalue", (d) => d["Year"])
+      .attr("data-yvalue", (d) => {
+        const date = new Date(`August 19, 1975 23:${d["Time"]} GMT+00:00`);
+        return date.toISOString();
+      })
       .on("mouseover", showTooltip)
       .on("mouseout", hideTooltip);
   })
