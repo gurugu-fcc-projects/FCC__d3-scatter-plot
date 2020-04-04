@@ -36,7 +36,7 @@ svgContainer
   .attr("transform", "rotate(-90)")
   .attr("x", -60 - height / 2)
   .attr("y", -60)
-  .text("Time in minutes");
+  .text("Race time in minutes");
 
 d3.json(dataUrl)
   .then((data) => {
