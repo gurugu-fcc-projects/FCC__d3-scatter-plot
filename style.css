@@ -58,14 +58,15 @@ body {
   position: relative;
 } */
 
-/* .bar {
+.data-circle {
   fill: var(--bar-color);
   cursor: pointer;
+  transition: fill 0.5s;
 }
 
-.bar:hover {
+.data-circle:hover {
   fill: var(--bar-color-hover);
-} */
+}
 
 .axis-label {
   stroke: var(--text-color-2);

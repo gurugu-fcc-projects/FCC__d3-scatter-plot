@@ -80,6 +80,7 @@ d3.json(dataUrl)
       .attr("cx", (d, i) => 100 + i * 12)
       .attr("cy", (d, i) => 100 + i * 12)
       .attr("r", 10)
-      .attr("fill", "tomato");
+      .attr("class", "data-circle");
+    // .attr("fill", "tomato");
   })
   .catch((err) => console.log(err));
