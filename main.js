@@ -38,6 +38,33 @@ svgContainer
   .attr("y", -60)
   .text("Race time in minutes");
 
+//--> Add tooltip
+const tooltip = d3
+  .select(".content")
+  .append("div")
+  .attr("id", "tooltip")
+  .style("left", width / 2)
+  .style("top", height / 2)
+  .style("opacity", 0);
+
+//--> Show tooltip
+const showTooltip = (d) => {
+  const content = `<div>${d["Name"]}</div><div>${d["Doping"]}</div>`;
+
+  tooltip
+    .html(content)
+    .style("left", `${d3.event.pageX + 15}px`)
+    .style("top", `${d3.event.pageY - 28}px`)
+    .transition()
+    .duration(200)
+    .style("opacity", 0.9);
+};
+
+//--> Hide tooltip
+const hideTooltip = () => {
+  tooltip.transition().duration(200).style("opacity", 0);
+};
+
 d3.json(dataUrl)
   .then((data) => {
     const parseYear = d3.timeParse("%Y");
@@ -80,6 +107,8 @@ d3.json(dataUrl)
       .attr("r", 10)
       .attr("class", (d) =>
         d["Doping"].length > 0 ? "data-circle doping" : "data-circle"
-      );
+      )
+      .on("mouseover", showTooltip)
+      .on("mouseout", hideTooltip);
   })
   .catch((err) => console.log(err));
