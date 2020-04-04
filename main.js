@@ -77,9 +77,11 @@ d3.json(dataUrl)
       .data(data)
       .enter()
       .append("circle")
-      .attr("cx", (d, i) => xScale(parseYear(d["Year"])))
-      .attr("cy", (d, i) => yScale(d["Seconds"] * 1000))
+      .attr("cx", (d) => xScale(parseYear(d["Year"])))
+      .attr("cy", (d) => yScale(d["Seconds"] * 1000))
       .attr("r", 10)
-      .attr("class", "data-circle");
+      .attr("class", (d) =>
+        d["Doping"].length > 0 ? "data-circle doping" : "data-circle"
+      );
   })
   .catch((err) => console.log(err));
