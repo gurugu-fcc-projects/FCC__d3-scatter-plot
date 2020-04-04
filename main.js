@@ -51,7 +51,7 @@ d3.json(dataUrl)
       d3.max(data, (d) => parseYear(d["Year"] + 1)),
     ]);
     yScale.domain([
-      d3.min(data, (d) => d["Seconds"] * 1000 - 10000),
+      d3.min(data, (d) => d["Seconds"] * 1000 - 5000),
       d3.max(data, (d) => d["Seconds"] * 1000 + 10000),
     ]);
 
