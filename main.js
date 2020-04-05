@@ -38,6 +38,42 @@ svgContainer
   .attr("y", -60)
   .text("Race time in minutes");
 
+//--> Add legend
+const legend = svgContainer
+  .append("g")
+  .attr("id", "legend")
+  .attr("transform", `translate(700, 100)`);
+
+legend
+  .append("rect")
+  .attr("class", "legend-doping")
+  .attr("y", 10)
+  .attr("width", 20)
+  .attr("height", 20);
+
+legend
+  .append("rect")
+  .attr("class", "legend-no-doping")
+  .attr("y", 40)
+  .attr("width", 20)
+  .attr("height", 20);
+
+legend
+  .append("text")
+  .attr("class", "legend-text")
+  .attr("x", 30)
+  .attr("y", 21)
+  .attr("alignment-baseline", "middle")
+  .text("Doping allegations");
+
+legend
+  .append("text")
+  .attr("class", "legend-text")
+  .attr("x", 30)
+  .attr("y", 51)
+  .attr("alignment-baseline", "middle")
+  .text("No doping allegations");
+
 //--> Add tooltip
 const tooltip = d3
   .select(".content")
