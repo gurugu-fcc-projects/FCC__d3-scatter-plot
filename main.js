@@ -105,8 +105,6 @@ d3.json(dataUrl)
     const parseYear = d3.timeParse("%Y");
     const timeFormat = d3.timeFormat("%M:%S");
 
-    console.log(data);
-
     //--> X & Y scale domains
     xScale.domain([
       d3.min(data, (d) => parseYear(d["Year"] - 1)),
