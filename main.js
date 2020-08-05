@@ -5,11 +5,18 @@ const margin = { top: 20, right: 20, bottom: 70, left: 70 };
 const width = 1000 - margin.left - margin.right;
 const height = 600 - margin.top - margin.bottom;
 
+const parseYear = d3.timeParse("%Y");
+const timeFormat = d3.timeFormat("%M:%S");
+
 const xScale = d3.scaleTime().range([0, width]);
 const yScale = d3.scaleTime().range([0, height]);
 
-const xAxis = d3.axisBottom().scale(xScale);
-const yAxis = d3.axisLeft().scale(yScale);
+const xAxis = d3.axisBottom(xScale).ticks(null).tickSize(10);
+const yAxis = d3
+  .axisLeft(yScale)
+  .ticks(null)
+  .tickSize(10)
+  .tickFormat(timeFormat);
 
 const svg = d3
   .select(".content")
@@ -82,7 +89,7 @@ const tooltip = d3
   .style("opacity", 0);
 
 //--> Show tooltip
-const showTooltip = (d) => {
+const showTooltip = d => {
   const content = `<div>${d["Name"]} (${d["Nationality"]})</div><div>Place: ${d["Place"]}</div><div>${d["Doping"]}</div>`;
 
   tooltip
@@ -101,18 +108,15 @@ const hideTooltip = () => {
 };
 
 d3.json(dataUrl)
-  .then((data) => {
-    const parseYear = d3.timeParse("%Y");
-    const timeFormat = d3.timeFormat("%M:%S");
-
+  .then(data => {
     //--> X & Y scale domains
     xScale.domain([
-      d3.min(data, (d) => parseYear(d["Year"] - 1)),
-      d3.max(data, (d) => parseYear(d["Year"] + 1)),
+      d3.min(data, d => parseYear(d["Year"] - 1)),
+      d3.max(data, d => parseYear(d["Year"] + 1)),
     ]);
     yScale.domain([
-      d3.min(data, (d) => d["Seconds"] * 1000 - 5000),
-      d3.max(data, (d) => d["Seconds"] * 1000 + 10000),
+      d3.min(data, d => d["Seconds"] * 1000 - 5000),
+      d3.max(data, d => d["Seconds"] * 1000 + 10000),
     ]);
 
     //--> X axis
@@ -121,30 +125,37 @@ d3.json(dataUrl)
       .attr("id", "x-axis")
       .attr("class", "axis")
       .attr("transform", `translate(0, ${height})`)
-      .call(xAxis.ticks(null).tickSize(10));
+      .call(xAxis);
 
     //--> Y axis
     svgContainer
       .append("g")
       .attr("id", "y-axis")
       .attr("class", "axis")
-      .call(yAxis.ticks(null).tickSize(10).tickFormat(timeFormat));
+      .call(yAxis);
 
     svgContainer
       .selectAll("circle")
       .data(data)
       .enter()
       .append("circle")
-      .attr("cx", (d) => xScale(parseYear(d["Year"])))
-      .attr("cy", (d) => yScale(d["Seconds"] * 1000))
+      .attr("cx", d => xScale(parseYear(d["Year"])))
+      .attr("cy", d => yScale(d["Seconds"] * 1000))
       .attr("r", 10)
-      .attr("class", (d) => (d["Doping"].length > 0 ? "dot doping" : "dot"))
-      .attr("data-xvalue", (d) => d["Year"])
-      .attr("data-yvalue", (d) => {
+      .attr("class", d => (d["Doping"].length > 0 ? "dot doping" : "dot"))
+      .attr("data-xvalue", d => d["Year"])
+      .attr("data-yvalue", d => {
         const date = new Date(`August 19, 1975 23:${d["Time"]} GMT+00:00`);
         return date.toISOString();
       })
       .on("mouseover", showTooltip)
       .on("mouseout", hideTooltip);
+    // .on("mouseenter", function (actual, idx) {
+    //   console.log(this);
+    //   d3.select(this).style("opacity", 0.5);
+    // })
+    // .on("mouseleave", function (actual, idx) {
+    //   d3.select(this).style("opacity", 1);
+    // });
   })
-  .catch((err) => console.log(err));
+  .catch(err => console.log(err));
