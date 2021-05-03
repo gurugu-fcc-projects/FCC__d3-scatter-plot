@@ -6,7 +6,7 @@ const width = 1000 - margin.left - margin.right;
 const height = 600 - margin.top - margin.bottom;
 
 const parseYear = d3.timeParse("%Y");
-const timeFormat = d3.timeFormat("%M:%S");
+const formatDate = d3.timeFormat("%M:%S");
 
 const xScale = d3.scaleTime().range([0, width]);
 const yScale = d3.scaleTime().range([0, height]);
@@ -16,7 +16,7 @@ const yAxis = d3
   .axisLeft(yScale)
   .ticks(null)
   .tickSize(10)
-  .tickFormat(timeFormat);
+  .tickFormat(formatDate);
 
 const svg = d3
   .select(".content")
