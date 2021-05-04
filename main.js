@@ -11,12 +11,8 @@ const formatDate = d3.timeFormat("%M:%S");
 const xScale = d3.scaleTime().range([0, width]);
 const yScale = d3.scaleTime().range([0, height]);
 
-const xAxis = d3.axisBottom(xScale).ticks(null).tickSize(10);
-const yAxis = d3
-  .axisLeft(yScale)
-  .ticks(null)
-  .tickSize(10)
-  .tickFormat(formatDate);
+const xAxis = d3.axisBottom(xScale).tickSize(10);
+const yAxis = d3.axisLeft(yScale).tickSize(10).tickFormat(formatDate);
 
 const svg = d3
   .select(".content")
