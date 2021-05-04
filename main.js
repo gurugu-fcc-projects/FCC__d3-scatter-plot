@@ -20,12 +20,12 @@ const svg = d3
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom);
 
-const svgContainer = svg
+const scatterPlotContainer = svg
   .append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 //--> X axis label
-svgContainer
+scatterPlotContainer
   .append("text")
   .attr("class", "axis-label")
   .attr("x", width / 2 - 30)
@@ -33,7 +33,7 @@ svgContainer
   .text("Year");
 
 //--> Y axis label
-svgContainer
+scatterPlotContainer
   .append("text")
   .attr("class", "axis-label")
   .attr("transform", "rotate(-90)")
@@ -42,7 +42,7 @@ svgContainer
   .text("Race time in minutes");
 
 //--> Add legend
-const legend = svgContainer
+const legend = scatterPlotContainer
   .append("g")
   .attr("id", "legend")
   .attr("transform", `translate(700, 100)`);
@@ -116,7 +116,7 @@ d3.json(dataUrl)
     ]);
 
     //--> X axis
-    svgContainer
+    scatterPlotContainer
       .append("g")
       .attr("id", "x-axis")
       .attr("class", "axis")
@@ -124,13 +124,13 @@ d3.json(dataUrl)
       .call(xAxis);
 
     //--> Y axis
-    svgContainer
+    scatterPlotContainer
       .append("g")
       .attr("id", "y-axis")
       .attr("class", "axis")
       .call(yAxis);
 
-    svgContainer
+    scatterPlotContainer
       .selectAll("circle")
       .data(data)
       .enter()
