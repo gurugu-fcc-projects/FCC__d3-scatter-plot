@@ -105,16 +105,20 @@ const hideTooltip = () => {
 
 d3.json(dataUrl)
   .then(data => {
+    const processedData = data.map(item => {
+      return { ...item, Seconds: item["Seconds"] * 1000 };
+    });
+
     //--> X & Y scale domains
     xScale.domain([
-      d3.min(data, d => parseYear(d["Year"] - 1)),
-      d3.max(data, d => parseYear(d["Year"] + 1)),
+      d3.min(processedData, d => parseYear(d["Year"] - 1)),
+      d3.max(processedData, d => parseYear(d["Year"] + 1)),
     ]);
     yScale.domain([
-      d3.min(data, d => d["Seconds"] * 1000) - 5000,
-      d3.max(data, d => d["Seconds"] * 1000) + 10000,
+      d3.min(processedData, d => d["Seconds"]) - 5000,
+      d3.max(processedData, d => d["Seconds"]) + 10000,
     ]);
-    console.log(xScale.domain());
+
     //--> X axis
     scatterPlotContainer
       .append("g")
@@ -132,11 +136,11 @@ d3.json(dataUrl)
 
     scatterPlotContainer
       .selectAll("circle")
-      .data(data)
+      .data(processedData)
       .enter()
       .append("circle")
       .attr("cx", d => xScale(parseYear(d["Year"])))
-      .attr("cy", d => yScale(d["Seconds"] * 1000))
+      .attr("cy", d => yScale(d["Seconds"]))
       .attr("r", 10)
       .attr("class", d => (d["Doping"].length > 0 ? "dot doping" : "dot"))
       .attr("data-xvalue", d => d["Year"])
